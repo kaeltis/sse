@@ -19,21 +19,6 @@ class User extends Authenticatable
         self::EMPLOYEE => 'Employee'
     ];
 
-    public function isStudent()
-    {
-        return $this->role == self::STUDENT;
-    }
-
-    public function isProfessor()
-    {
-        return $this->role == self::PROFESSOR;
-    }
-
-    public function isEmployee()
-    {
-        return $this->role == self::EMPLOYEE;
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -51,4 +36,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function isStudent()
+    {
+        return $this->role == self::STUDENT;
+    }
+
+    public function isProfessor()
+    {
+        return $this->role == self::PROFESSOR;
+    }
+
+    public function isEmployee()
+    {
+        return $this->role == self::EMPLOYEE;
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany('App\Course');
+    }
 }
