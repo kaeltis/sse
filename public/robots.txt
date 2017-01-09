@@ -1,2 +1,3 @@
+# ⚑ Flag 1 found! ⚑
 User-agent: *
-Disallow:
+Disallow: /adminer/adminer-4.2.5-mysql-de.php
