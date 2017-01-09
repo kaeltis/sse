@@ -25,7 +25,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->isProfessor() || Auth::user()->isEmployee()) {
+
+            $students = User::all()->where('role', 's');
+            $professors = User::all()->where('role', 'p');
+            $employees = User::all()->where('role', 'e');
+
+            return view('user.index', compact('students', 'professors', 'employees'));
+        } else {
+            flash('You are not permitted to view this!', 'danger');
+            return redirect('/home');
+        }
     }
 
     /**
