@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CourseController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -39,7 +41,7 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,18 +52,25 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        if (Auth::user()->isStudent() && Auth::user()->id == $id) {
+            return view('user.show', ['user' => User::findOrFail($id)]);
+        } elseif (Auth::user()->isProfessor() || Auth::user()->isEmployee()) {
+            return view('user.show', ['user' => User::findOrFail($id)]);
+        } else {
+            flash('You are not permitted to view this!', 'danger');
+            return redirect('/home');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,8 +81,8 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -84,7 +93,7 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

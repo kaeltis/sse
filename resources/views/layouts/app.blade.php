@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>PHPGrade</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <b>PHP</b>Grade
                 </a>
             </div>
 
@@ -63,6 +63,8 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    <a href="{{ url('user') }}">Profile</a>
+
                                     <a href="{{ url('/logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
