@@ -2,4 +2,5 @@
 02 - MySQL Interface mit sehr einfachem Passwort (root:toor) gesichert
 03 - XSS in Profilfeldern
 04 - SQL Injection über Notensharing Funktion
-05 - Controller zum Ändern der Usergruppe nicht geschützt, eigene Usergruppe kann durch POST geändert werden
+05a - Controller zum Update der User nicht geschützt, User können beliebig durch POST/PUT geändert werden (inkl. Gruppe)
+05b - Tatsächliche Veränderung der Gruppe durch nicht-privilegierten User

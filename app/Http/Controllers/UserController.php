@@ -75,7 +75,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        if (Auth::user()->isEmployee()) {
+            return view('user.edit_staff', ['user' => User::findOrFail($id)]);
+        } elseif (Auth::user()->id == $id) {
+            return view('user.edit', ['user' => User::findOrFail($id)]);
+        } else {
+            flash('You are not permitted to view this!', 'danger');
+            return redirect('/home');
+        }
     }
 
     /**
@@ -87,7 +95,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Flag #5 - No check if user has permissions for request
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        flash('User ' . $user->id . ' updated!', 'success');
+
+        // Show Flag #5
+        if ((Auth::user()->isStudent() || Auth::user()->isProfessor()) && Auth::user()->id != $id)
+            flash('User ' . $user->id . ' updated!<br>⚑ Flag #5a ⚑ found!', 'warning');
+        if ((Auth::user()->isStudent() || Auth::user()->isProfessor()) && !is_null($request->role))
+            flash('User ' . $user->id . ' updated!<br>⚑ Flag #5b ⚑ found!', 'warning');
+
+        return view('user.show', ['user' => $user]);
     }
 
     /**
@@ -98,6 +117,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Auth::user()->isEmployee()) {
+            User::destroy($id);
+            flash('The user has been deleted', 'success');
+            return redirect('/user');
+        } else {
+            flash('You are not permitted to do this!', 'danger');
+            return redirect('/home');
+        }
     }
 }
