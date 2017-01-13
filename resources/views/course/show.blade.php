@@ -32,6 +32,33 @@
                         @endif
 
                         @if(Auth::user()->isEmployee() || Auth::user()->isProfessor())
+                            <h4>Add Grade</h4>
+                            {!! Form::open(['route' => ['course.adduser', $course->id]]) !!}
+
+                            <div class="form-group">
+                                {{ Form::label('userid', 'UserID', ['class' => 'control-label']) }}
+                                {{ Form::number('userid', null, ['class' => 'form-control', 'required']) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ Form::label('grade', 'Grade', ['class' => 'control-label']) }}
+                                {{ Form::number('grade', null, ['class' => 'form-control', 'required']) }}
+                            </div>
+
+                            {!! Form::submit('Add', ['class' => 'btn btn-primary btn-xs']) !!}
+                            {!! Form::close() !!}
+                            <hr>
+                            Course Members:
+                            <ul>
+                                @if($course->members)
+                                    @foreach($course->members as $member)
+                                        <li>{{ $member->id }} - {{ $member->pivot->grade }}</li>
+                                    @endforeach
+                                @else
+                                    <li>none</li>
+                                @endif
+                            </ul>
+                            <hr>
                             <a href="{{url('/course/'.$course->id.'/edit')}}" class="btn btn-primary">Edit Course</a>
                             <hr>
                             {!! Form::model($course, ['route' => ['course.destroy', $course->id], 'method' => 'delete']) !!}

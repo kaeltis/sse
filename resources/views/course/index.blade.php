@@ -14,11 +14,13 @@
 
                     <div class="panel-body">
                         @if(count($courses))
-                            @foreach($courses as $course)
-                                <a href="{{url('/course/'.$course->id)}}">{{$course->id}} - {{ $course->semester }}
-                                    - {{ $course->name }}</a>
-                                <br>
-                            @endforeach
+                            <ul>
+                                @foreach($courses as $course)
+                                    <li><a href="{{url('/course/'.$course->id)}}">{{$course->id}}
+                                            - {{ $course->semester }}
+                                            - {{ $course->name }}</a></li>
+                                @endforeach
+                            </ul>
                         @else
                             <h2>No courses found!</h2>
                         @endif

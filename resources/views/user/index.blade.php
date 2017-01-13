@@ -8,20 +8,36 @@
                     <div class="panel-heading">Users</div>
 
                     <div class="panel-body">
-                        <h1>Employees</h1>
-                        @foreach($employees as $user)
-                            <a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}, {{ $user->firstname }}</a><br>
-                        @endforeach
+                        <ul>
+                            <li>
+                                <strong>Employees</strong>
+                                <ul>
+                                    @foreach($employees as $user)
+                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
+                                                , {{ $user->firstname }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
 
-                        <h1>Professors</h1>
-                        @foreach($professors as $user)
-                            <a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}, {{ $user->firstname }}</a><br>
-                        @endforeach
-
-                        <h1>Students</h1>
-                        @foreach($students as $user)
-                            <a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}, {{ $user->firstname }}</a><br>
-                        @endforeach
+                            <li>
+                                <strong>Professors</strong>
+                                <ul>
+                                    @foreach($professors as $user)
+                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
+                                                , {{ $user->firstname }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Students</strong>
+                                <ul>
+                                    @foreach($students as $user)
+                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
+                                                , {{ $user->firstname }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

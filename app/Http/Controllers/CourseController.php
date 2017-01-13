@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -135,5 +136,14 @@ class CourseController extends Controller
         }
 
         return redirect('/course');
+    }
+
+    public function addUser($id, Request $request)
+    {
+        $user = User::findOrFail($request->userid);
+        $user->courses()->attach($id, ['grade' => $request->grade]);
+
+        flash('User added to course!', 'success');
+        return redirect('/course/' . $id);
     }
 }
