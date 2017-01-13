@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Profile</div>
+                    <div class="panel-heading">Edit User - {{$user->id}}</div>
 
                     <div class="panel-body">
                         {!! Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'put']) !!}
@@ -44,7 +44,7 @@
 
                         <hr>
 
-                        {!! Form::submit(null, ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

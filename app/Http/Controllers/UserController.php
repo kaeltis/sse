@@ -26,7 +26,6 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::user()->isProfessor() || Auth::user()->isEmployee()) {
-
             $students = User::all()->where('role', 's');
             $professors = User::all()->where('role', 'p');
             $employees = User::all()->where('role', 'e');
@@ -45,7 +44,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        flash('You are not permitted to view this!', 'danger');
+        return redirect('/home');
     }
 
     /**
@@ -56,7 +56,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        flash('You are not permitted to view this!', 'danger');
+        return redirect('/home');
     }
 
     /**

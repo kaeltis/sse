@@ -44,7 +44,12 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    @if(Auth::check())
+                        @if(Auth::user()->isProfessor() || Auth::user()->isEmployee())
+                            <li><a href="{{ url('/user') }}">Users</a></li>
+                        @endif
+                        <li><a href="{{ url('/course') }}">Courses</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
