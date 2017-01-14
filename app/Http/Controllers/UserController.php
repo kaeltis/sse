@@ -149,7 +149,7 @@ class UserController extends Controller
         $flagcheck = DB::select("SELECT * FROM users WHERE id = '" . $id . "' AND sharetoken = '" . $token . "'");
         if (count($flagcheck) > 1) {
             // Show Flag #4
-            echo "More than one user found for token, this shouldn't happen, if you see this, tell Jimmy (jimmy@verygudit.com) to fix it, send him this encrypted debug output:<br><br>";
+            echo "More than one user found for token, this should never happen, if you see this, tell Jimmy (jimmy@verygudit.com) to fix it, send him this encrypted debug output:<br><br>";
             echo "Debug Output:<br><textarea rows='30' cols='150' disabled>" . base64_encode("⚑ Flag #4 ⚑ found!\n\n" . print_r($flagcheck, true)) . "</textarea>";
             die();
         }
