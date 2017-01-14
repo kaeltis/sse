@@ -8,36 +8,23 @@
                     <div class="panel-heading">Users</div>
 
                     <div class="panel-body">
-                        <ul>
-                            <li>
-                                <strong>Employees</strong>
-                                <ul>
-                                    @foreach($employees as $user)
-                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
-                                                , {{ $user->firstname }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-
-                            <li>
-                                <strong>Professors</strong>
-                                <ul>
-                                    @foreach($professors as $user)
-                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
-                                                , {{ $user->firstname }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            <li>
-                                <strong>Students</strong>
-                                <ul>
-                                    @foreach($students as $user)
-                                        <li><a href="{{url('/user/'.$user->id)}}">{{ $user->id }} - {{ $user->name }}
-                                                , {{ $user->firstname }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>ID</th>
+                                <th>Lastname</th>
+                                <th>Firstname</th>
+                                <th>Role</th>
+                            </tr>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td><a href="{{url('/user/'.$user->id)}}"
+                                           class="btn btn-primary btn-xs">{{ $user->id }}</a></td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->firstname }}</td>
+                                    <td>{{ \App\User::$roles[$user->role] }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ Achtung, diese Applikation wurde für ein [CTF](https://de.wikipedia.org/wiki/Ca
 ## Flags
 - [x] 1 - Link zu MySQL Admin Webinterface in robots.txt
 - [ ] 2 - MySQL Interface mit sehr einfachem Passwort (root:toor) gesichert
-- [ ] 3 - XSS in Profilfeldern
-- [ ] 4 - SQL Injection über Notensharing Funktion
+- [x] 3 - XSS in Profilfeldern
+- [x] 4 - SQL Injection über Notensharing Funktion
 - [x] 5a - Controller zum Update der User nicht geschützt, User können beliebig durch POST/PUT geändert werden (inkl. Gruppe)
 - [x] 5b - Tatsächliche Veränderung der Gruppe durch nicht-privilegierten User

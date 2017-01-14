@@ -17,18 +17,22 @@
 
                     <div class="panel-body">
                         @if(count($courses))
-                            <ul>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Semester</th>
+                                    <th>Name</th>
+                                </tr>
                                 @foreach($courses as $course)
-                                    <li><a href="{{url('/course/'.$course->id)}}">{{$course->id}}
-                                            - {{ $course->semester }}
-                                            - {{ $course->name }}
-                                            @if(Auth::user()->isStudent())
-                                                - {{ $course->pivot->grade }}
-                                            @endif
-                                        </a>
-                                    </li>
+                                    <tr>
+                                        <td><a href="{{url('/course/'.$course->id)}}"
+                                               class="btn btn-primary btn-xs">{{$course->id}}</a></td>
+                                        <td>{{ $course->semester }}</td>
+                                        <td>{{ $course->name }}</td>
+                                        </li>
+                                    </tr>
                                 @endforeach
-                            </ul>
+                            </table>
                         @else
                             <h2>No courses found!</h2>
                         @endif

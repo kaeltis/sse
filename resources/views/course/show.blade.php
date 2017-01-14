@@ -8,30 +8,51 @@
                     <div class="panel-heading">Course - {{$course->id}}</div>
 
                     <div class="panel-body">
-                        <div class="form-group">
-                            {{ Form::label('name', 'Name', ['class' => 'control-label']) }}
-                            {{ Form::text('name', $course->name, ['class' => 'form-control', 'disabled']) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ Form::label('semester', 'Semester', ['class' => 'control-label']) }}
-                            {{ Form::text('semester', $course->semester, ['class' => 'form-control', 'disabled']) }}
-                        </div>
-
-                        <hr>
-
-                        @if(Auth::user()->isStudent())
-                            <div class="form-group">
-                                {{ Form::label('grade', 'Grade', ['class' => 'control-label']) }}
-                                @if($course->pivot->grade)
-                                    {{ Form::text('grade', $course->pivot->grade, ['class' => 'form-control', 'disabled']) }}
-                                @else
-                                    {{ Form::text('grade', 'none', ['class' => 'form-control', 'disabled']) }}
-                                @endif
-                            </div>
-                        @endif
+                        <table class="table table-striped">
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td>{{$course->name}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Semester</strong></td>
+                                <td>{{$course->semester}}</td>
+                            </tr>
+                            @if(Auth::user()->isStudent())
+                                <tr>
+                                    <td>Grade</td>
+                                    @if($course->pivot->grade)
+                                        <td>{{$course->pivot->grade}}</td>
+                                    @else
+                                        <td>none</td>
+                                    @endif
+                                </tr>
+                            @endif
+                        </table>
 
                         @if(Auth::user()->isEmployee() || Auth::user()->isProfessor())
+                            <hr>
+
+                            <h3>Course Members</h3>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Grade</th>
+                                </tr>
+                                @if($course->members)
+                                    @foreach($course->members as $member)
+                                        <tr>
+                                            <td>{{ $member->id }}</td>
+                                            <td>{{ $member->pivot->grade }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="2">none</td>
+                                    </tr>
+                                @endif
+                            </table>
+                            <hr>
+
                             <h4>Add Grade</h4>
                             {!! Form::open(['route' => ['course.adduser', $course->id]]) !!}
 
@@ -47,18 +68,9 @@
 
                             {!! Form::submit('Add', ['class' => 'btn btn-primary btn-xs']) !!}
                             {!! Form::close() !!}
+
                             <hr>
-                            Course Members:
-                            <ul>
-                                @if($course->members)
-                                    @foreach($course->members as $member)
-                                        <li>{{ $member->id }} - {{ $member->pivot->grade }}</li>
-                                    @endforeach
-                                @else
-                                    <li>none</li>
-                                @endif
-                            </ul>
-                            <hr>
+
                             <a href="{{url('/course/'.$course->id.'/edit')}}" class="btn btn-primary">Edit Course</a>
                             <hr>
                             {!! Form::model($course, ['route' => ['course.destroy', $course->id], 'method' => 'delete']) !!}
