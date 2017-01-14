@@ -110,6 +110,12 @@ class UserController extends Controller
         $user->update($request->all());
         flash('User ' . $user->id . ' updated!', 'success');
 
+        foreach ($request->all() as $field) {
+            // Show Flag #3
+            if (htmlspecialchars($field) != $field)
+                flash('User ' . $user->id . ' updated!<br>⚑ Flag #3 ⚑ found!', 'warning');
+        }
+
         // Show Flag #5
         if ((Auth::user()->isStudent() || Auth::user()->isProfessor()) && Auth::user()->id != $id)
             flash('User ' . $user->id . ' updated!<br>⚑ Flag #5a ⚑ found!', 'warning');
@@ -142,6 +148,7 @@ class UserController extends Controller
         // Flag #4 - Use raw user input for SQL Query
         $flagcheck = DB::select("SELECT * FROM users WHERE id = '" . $id . "' AND sharetoken = '" . $token . "'");
         if (count($flagcheck) > 1) {
+            // Show Flag #4
             echo "More than one user found for token, this shouldn't happen, if you see this, tell Jimmy (jimmy@verygudit.com) to fix it, send him this encrypted debug output:<br><br>";
             echo "Debug Output:<br><textarea rows='30' cols='150' disabled>" . base64_encode("⚑ Flag #4 ⚑ found!\n\n" . print_r($flagcheck, true)) . "</textarea>";
             die();
