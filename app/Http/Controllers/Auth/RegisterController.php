@@ -80,6 +80,7 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'phone' => $data['phone'],
             'birthdate' => $data['birthdate'],
+            'sharetoken' => str_random(32),
         ]);
     }
 }

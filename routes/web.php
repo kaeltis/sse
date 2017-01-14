@@ -20,5 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('user', 'UserController');
+Route::get('user/share/{id}/{token}', 'UserController@share')->name('user.share');
 Route::resource('course', 'CourseController');
 Route::post('course/{course}/adduser', 'CourseController@addUser')->name('course.adduser');

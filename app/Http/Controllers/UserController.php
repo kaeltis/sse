@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('share');
     }
 
     /**
@@ -136,5 +137,25 @@ class UserController extends Controller
             flash('You are not permitted to do this!', 'danger');
             return redirect('/home');
         }
+    }
+
+    public function share($id, $token)
+    {
+        // Flag #4 - Use raw user input for SQL Query
+        $flagcheck = DB::select("SELECT * FROM users WHERE id = '" . $id . "' AND sharetoken = '" . $token . "'");
+        if (count($flagcheck) > 1) {
+            echo "More than one user found for token, this shouldn't happen, if you see this, tell Jimmy (jimmy@verygudit.com) to fix it, send him this encrypted debug output:<br><br>";
+            echo "Debug Output:<br><textarea rows='30' cols='150' disabled>" . base64_encode("⚑ Flag #4 ⚑ found!\n\n" . print_r($flagcheck, true)) . "</textarea>";
+            die();
+        }
+
+        $user = User::findOrFail($id);
+        if ($user->sharetoken != $token) {
+            die("Wrong token for user!");
+        }
+
+        $courses = $user->courses;
+
+        return view('user.share', compact('user', 'courses'));
     }
 }

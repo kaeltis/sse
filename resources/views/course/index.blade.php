@@ -9,6 +9,9 @@
                         Courses
                         @if(Auth::user()->isEmployee() || Auth::user()->isProfessor())
                             <a href="{{url('/course/create')}}" class="btn btn-success btn-xs pull-right">Create</a>
+                        @else
+                            <a href="{{url('/user/share/'.Auth::user()->id.'/'.Auth::user()->sharetoken)}}"
+                               class="pull-right">Use this URL to share</a>
                         @endif
                     </div>
 
@@ -18,7 +21,12 @@
                                 @foreach($courses as $course)
                                     <li><a href="{{url('/course/'.$course->id)}}">{{$course->id}}
                                             - {{ $course->semester }}
-                                            - {{ $course->name }}</a></li>
+                                            - {{ $course->name }}
+                                            @if(Auth::user()->isStudent())
+                                                - {{ $course->pivot->grade }}
+                                            @endif
+                                        </a>
+                                    </li>
                                 @endforeach
                             </ul>
                         @else
