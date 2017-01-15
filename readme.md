@@ -15,7 +15,7 @@ Achtung, diese Applikation wurde für ein [CTF](https://de.wikipedia.org/wiki/Ca
 - [x] 5b - Tatsächliche Veränderung der Gruppe durch nicht-privilegierten User
 
 ## Behebung der Flags
-1. Keine sensiblen URLs über robots.txt preisgeben. Noch besser: robots.txt gar nicht benutzen und Crawler per Webserver über die User-Agenten blocken.
+1. Keine sensiblen URLs über robots.txt preisgeben. Noch besser: robots.txt gar nicht benutzen und Crawler mit dem Webserver über die User-Agenten blocken.
 2. Wenn SQL-Webinterface verwendet wird, dieses mit einem sicheren Passwort, Captcha und Rate-limiting absichern. Optimal: Tunnel vom Entwickler direkt zum MySQL Server über SSH mit publickey aufbauen.
 3. Eingaben der Nutzer nur nach vorherigem Escape ausgeben. Mit Laravel im View: `{{ $wert }}`
 4. Für SQL-Abfragen mit Inhalten von Anwendern Prepared Statements verwenden. Mit Laravel im Controller: `DB::table('tabelle')->where('zeile', '=', $wert)->get();`
