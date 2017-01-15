@@ -28,7 +28,6 @@ class UserController extends Controller
     {
         if (Auth::user()->isProfessor() || Auth::user()->isEmployee()) {
             $users = User::orderBy('role')->get();
-
             return view('user.index', compact('users'));
         } else {
             flash('You are not permitted to view this!', 'danger');
@@ -122,7 +121,7 @@ class UserController extends Controller
         if ((Auth::user()->isStudent() || Auth::user()->isProfessor()) && !is_null($request->role))
             flash('User ' . $user->id . ' updated!<br>⚑ Flag #5b ⚑ found!', 'warning');
 
-        return view('user.show', ['user' => $user]);
+        return view('user.show', compact('user'));
     }
 
     /**
