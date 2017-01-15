@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'zipcode' => $faker->postcode,
                 'city' => $faker->city,
                 'phone' => $faker->phoneNumber,
-                'birthday' => $faker->dateTimeThisCentury->format('Y-m-d'),
+                'birthdate' => $faker->dateTimeThisCentury->format('Y-m-d'),
                 'sharetoken' => str_random(32),
             ]);
         }
