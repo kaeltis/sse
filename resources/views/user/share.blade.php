@@ -5,15 +5,21 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Shared Grades</div>
+                    <div class="panel-heading">{{$user->name}}, {{$user->firstname}} - Shared Grades</div>
 
                     <div class="panel-body">
-                        <h1>{{$user->name}}, {{$user->firstname}}</h1>
-                        <ul>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Course</th>
+                                <th>Grade</th>
+                            </tr>
                             @foreach($courses as $course)
-                                <li>{{$course->name}} - {{$course->pivot->grade}}</li>
+                                <tr>
+                                    <td>{{$course->name}}</td>
+                                    <td>{{$course->pivot->grade}}</td>
+                                </tr>
                             @endforeach
-                        </ul>
+                        </table>
                     </div>
                 </div>
             </div>
