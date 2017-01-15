@@ -15,8 +15,8 @@ class CourseUserTableSeeder extends Seeder
 
         foreach (range(1, 50) as $index) {
             DB::table('course_user')->insert([
-                'course_id' => $faker->numberBetween(1, 5),
-                'user_id' => $faker->numberBetween(1, 5),
+                'course_id' => $faker->numberBetween(1001, 1050),
+                'user_id' => $faker->numberBetween(1710001, 1710061),
                 'grade' => $faker->numberBetween(1, 5)
             ]);
         }

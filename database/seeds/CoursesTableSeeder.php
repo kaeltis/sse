@@ -13,7 +13,7 @@ class CoursesTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('de_DE');
 
-        foreach (range(1, 20) as $index) {
+        foreach (range(1, 50) as $index) {
             DB::table('courses')->insert([
                 'name' => $faker->colorName . ' ' . $faker->jobTitle,
                 'semester' => $faker->randomElement(['WS', 'SS']).$faker->year,
