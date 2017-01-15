@@ -24,7 +24,7 @@ class CourseUserTableSeeder extends Seeder
                     'grade' => $faker->numberBetween(1, 5)
                 ]);
             } catch (\Illuminate\Database\QueryException $queryException) {
-                print 'Skipping duplicate';
+                print 'Skipping duplicate\n';
             }
         }
     }
