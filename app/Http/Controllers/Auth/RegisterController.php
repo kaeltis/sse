@@ -69,7 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -82,5 +82,19 @@ class RegisterController extends Controller
             'birthdate' => $data['birthdate'],
             'sharetoken' => str_random(32),
         ]);
+
+        //Attach some random courses for CTF
+        foreach ($this->randomGen(1001, 1050, 5) as $index) {
+            $user->courses()->attach($index, ['grade' => random_int(1, 5)]);
+        }
+
+        return $user;
+    }
+
+    private function randomGen($min, $max, $quantity)
+    {
+        $numbers = range($min, $max);
+        shuffle($numbers);
+        return array_slice($numbers, 0, $quantity);
     }
 }
