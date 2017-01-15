@@ -46,14 +46,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    const STUDENT = 's';
-    const PROFESSOR = 'p';
     const EMPLOYEE = 'e';
+    const PROFESSOR = 'p';
+    const STUDENT = 's';
 
     public static $roles = [
-        self::STUDENT => 'Student',
+        self::EMPLOYEE => 'Employee',
         self::PROFESSOR => 'Professor',
-        self::EMPLOYEE => 'Employee'
+        self::STUDENT => 'Student'
     ];
 
     /**
