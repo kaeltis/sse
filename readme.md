@@ -19,4 +19,4 @@ Achtung, diese Applikation wurde für ein [CTF](https://de.wikipedia.org/wiki/Ca
 2. Wenn SQL-Webinterface verwendet wird, dieses mit einem sicheren Passwort, Captcha und Rate-limiting absichern. Optimal: Tunnel vom Entwickler direkt zum MySQL Server über SSH mit publickey aufbauen.
 3. Eingaben der Nutzer nur nach vorherigem Escape ausgeben. Mit Laravel im View: `{{ $wert }}`
 4. Für SQL-Abfragen mit Inhalten von Anwendern Prepared Statements verwenden. Mit Laravel im Controller: `DB::table('tabelle')->where('zeile', '=', $wert)->get();`
-5. Rollen- bzw. Rechteüberprüfung nicht nur in Views, sondern auch im Controller. Mit Laravel über Middleware
+5. Rollen- bzw. Rechteüberprüfung nicht nur in Views, sondern auch im Controller. Mit Laravel über Middleware im Controller.
