@@ -1,5 +1,7 @@
 <?php
 
+use App\Course;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class CourseUserTableSeeder extends Seeder
@@ -13,12 +15,19 @@ class CourseUserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('de_DE');
 
+        $users = User::get()->lists('id')->all();
+        $courses = Course::get()->lists('id')->all();
+
         foreach (range(1, 250) as $index) {
-            DB::table('course_user')->insert([
-                'course_id' => $faker->numberBetween(1001, 1050),
-                'user_id' => $faker->numberBetween(1710001, 1710061),
-                'grade' => $faker->numberBetween(1, 5)
-            ]);
+            try {
+                DB::table('course_user')->insert([
+                    'course_id' => $faker->randomElement($courses),
+                    'user_id' => $faker->randomElement($users),
+                    'grade' => $faker->numberBetween(1, 5)
+                ]);
+            } catch (\Illuminate\Database\QueryException $queryException) {
+                print 'Skipping duplicate';
+            }
         }
     }
 }
