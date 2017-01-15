@@ -13,7 +13,7 @@ class CourseUserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('de_DE');
 
-        foreach (range(1, 50) as $index) {
+        foreach (range(1, 250) as $index) {
             DB::table('course_user')->insert([
                 'course_id' => $faker->numberBetween(1001, 1050),
                 'user_id' => $faker->numberBetween(1710001, 1710061),
