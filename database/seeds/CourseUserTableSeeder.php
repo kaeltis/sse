@@ -1,7 +1,5 @@
 <?php
 
-use App\Course;
-use App\User;
 use Illuminate\Database\Seeder;
 
 class CourseUserTableSeeder extends Seeder
@@ -15,8 +13,8 @@ class CourseUserTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('de_DE');
 
-        $users = User::get()->lists('id')->all();
-        $courses = Course::get()->lists('id')->all();
+        $users = DB::table('users')->pluck('id')->all();
+        $courses = DB::table('courses')->pluck('id')->all();
 
         foreach (range(1, 250) as $index) {
             try {
