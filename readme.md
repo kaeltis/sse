@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Kaeltis/sse.svg?token=7yrSFvKqhWLXN9sFnDmv&branch=master)](https://travis-ci.com/Kaeltis/sse)
+[![Build Status](https://travis-ci.org/Kaeltis/sse.svg?branch=master)](https://travis-ci.org/Kaeltis/sse)
 
 ## PHPGrade
 PHP Applikation zur Notenverwaltung von Studenten auf Basis von Laravel.
